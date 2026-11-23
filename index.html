@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaGo — Главная</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* СКОРО В КИНО */
+
+        .upcoming-section {
+            position: relative;
+            padding: 60px 20px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.13), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.08), transparent 30%),
+                #0b0b0b;
+            overflow: hidden;
+        }
+
+        .upcoming-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 3px;
+            background: #e50914;
+            box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+        }
+
+        .upcoming-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .upcoming-header h2 {
+            font-size: 42px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .upcoming-header h2 span {
+            color: #e50914;
+        }
+
+        .upcoming-header p {
+            color: #999;
+            font-size: 17px;
+        }
+
+        .upcoming-category {
+            margin-bottom: 50px;
+        }
+
+        .upcoming-category-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .upcoming-category-title::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(to right, rgba(229, 9, 20, 0.7), transparent);
+        }
+
+        .upcoming-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        .upcoming-card {
+            min-width: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #171717;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .upcoming-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(229, 9, 20, 0.6);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ПОСТЕРЫ */
+
+        .upcoming-poster {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upcoming-poster img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+            transition: transform 0.4s ease;
+        }
+
+        .upcoming-card:hover .upcoming-poster img {
+            transform: scale(1.03);
+        }
+
+        .poster-overlay {
+            display: none;
+        }
+
+        .premiere-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #e50914;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.35);
+        }
+
+        /* текст под постерами */
+
+        .upcoming-info {
+            position: relative;
+            padding: 18px 20px 22px;
+            margin: 0;
+            z-index: 4;
+        }
+
+        .upcoming-info h3 {
+            color: white;
+            font-size: 22px;
+            margin: 0 0 10px;
+        }
+
+        .upcoming-meta {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .upcoming-date {
+            color: #e50914;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 17px;
+        }
+
+        .upcoming-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upcoming-buttons a {
+            text-decoration: none;
+        }
+
+        .trailer-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .trailer-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* АДАПТАЦИЯ */
+
+        @media (max-width: 900px) {
+            .upcoming-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .upcoming-section {
+                padding: 40px 15px;
+            }
+
+            .upcoming-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .upcoming-header h2 {
+                font-size: 32px;
+            }
+
+            .upcoming-poster {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ШАПКА -->
+
+<header>
+    <div class="navbar">
+        <a href="index.html" class="logo">Cinema<span>Go</span></a>
+
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="ratings.html">Рейтинги</a>
+            <a href="soundtracks.html">Саундтреки</a>
+            <a href="booking.html">Бронирование</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="favorites.html">Избранное</a>
+            <a href="account.html">Аккаунт</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ГЛАВНЫЙ ЭКРАН -->
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Добро пожаловать в CinemaGo</h1>
+
+        <p>
+            Твой онлайн-сервис для просмотра фильмов,
+            поиска новинок и бронирования мест в кино.
+        </p>
+
+        <a href="catalog.html" class="btn">Смотреть фильмы</a>
+        <a href="booking.html" class="btn btn-secondary">Забронировать</a>
+    </div>
+</section>
+
+<!-- ЦЕЛЬ ПРОЕКТА -->
+
+<section class="section">
+    <div class="container">
+        <h2>Цель проекта</h2>
+
+        <p class="section-subtitle">
+            CinemaGo создан для удобного поиска фильмов,
+            просмотра информации о них и онлайн-бронирования
+            мест в кинотеатре.
+        </p>
+    </div>
+</section>
+
+<!-- ВОЗМОЖНОСТИ САЙТА -->
+
+<section class="section">
+    <div class="container">
+        <h2>Что есть в CinemaGo?</h2>
+
+        <div class="movie-grid cinemago-grid">
+
+            <div class="movie-card cinemago-card">
+                <h3>Каталог фильмов</h3>
+                <p>Большой выбор казахстанских и зарубежных фильмов.</p>
+                <a href="catalog.html" class="btn">Открыть каталог</a>
+            </div>
+
+            <div class="movie-card cinemago-card">
+                <h3>Рейтинги</h3>
+                <p>Узнайте, какие фильмы получили самые высокие оценки.</p>
+                <a href="ratings.html" class="btn">Смотреть рейтинги</a>
+            </div>
+
+            <div class="movie-card cinemago-card">
+                <h3>Саундтреки</h3>
+                <p>Слушайте музыку из любимых фильмов.</p>
+                <a href="soundtracks.html" class="btn">Слушать музыку</a>
+            </div>
+
+            <div class="movie-card cinemago-card">
+                <h3>Бронирование</h3>
+                <p>Выберите фильм, дату, время и место в кинозале.</p>
+                <a href="booking.html" class="btn">Забронировать</a>
+            </div>
+
+            <div class="movie-card cinemago-card">
+                <h3>Отзывы</h3>
+                <p>Читайте отзывы зрителей и оставляйте свои.</p>
+                <a href="reviews.html" class="btn">Читать отзывы</a>
+            </div>
+
+            <div class="movie-card cinemago-card">
+                <h3>Избранное</h3>
+                <p>Сохраняйте понравившиеся фильмы и возвращайтесь к ним позже.</p>
+                <a href="favorites.html" class="btn">Открыть избранное</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ПОПУЛЯРНЫЕ ФИЛЬМЫ -->
+
+<section class="section">
+    <div class="container">
+        <h2>Популярные фильмы</h2>
+
+        <div class="movie-grid">
+            <div class="movie-card">
+                <h3>Ғашықпын саған</h3>
+                <p>Романтика · Казахстан</p>
+            </div>
+
+            <div class="movie-card">
+                <h3>Рэкетир</h3>
+                <p>Криминал · Казахстан</p>
+            </div>
+
+            <div class="movie-card">
+                <h3>Интерстеллар</h3>
+                <p>Фантастика · США</p>
+            </div>
+
+            <div class="movie-card">
+                <h3>Дәстүр</h3>
+                <p>Ужасы · Казахстан</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- СКОРО В КИНО -->
+
+<section class="upcoming-section">
+    <div class="container">
+
+        <div class="upcoming-header">
+            <h2><span>Скоро</span> в кино</h2>
+            <p>Новые фильмы на большом экране</p>
+        </div>
+
+        <!-- КАЗАХСТАНСКИЕ ФИЛЬМЫ -->
+
+        <div class="upcoming-category">
+            <h3 class="upcoming-category-title">🇰🇿 Казахстанские премьеры</h3>
+
+            <div class="upcoming-grid">
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">🇰🇿 В КИНО</span>
+                        <img src="https://images-s.kinorium.com/movie/1080/12548737.jpg?1785351093"
+                             alt="7 қарақшы">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>7 қарақшы</h3>
+                        <div class="upcoming-meta">Приключения · Боевик</div>
+                        <div class="upcoming-date">В кино с 24 сентября 2026</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=7+қарақшы+фильм"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">🇰🇿 НОВИНКА</span>
+                        <img src="https://avatars.mds.yandex.net/i?id=d1c960a575ccf3db8dd94e95b169ab17ea74f0b1-12569850-images-thumbs&n=13"
+                             alt="Жарығым-ай">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>Жарығым-ай</h3>
+                        <div class="upcoming-meta">Драма · Казахстан</div>
+                        <div class="upcoming-date">В кино с 10 сентября 2026</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=Жарығым-ай+фильм"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">🇰🇿 СКОРО</span>
+                        <img src="https://images-s.kinorium.com/movie/1080/13166319.jpg?1789479071"
+                             alt="Қызыл раушан">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>Қызыл раушан</h3>
+                        <div class="upcoming-meta">Драма · Казахстан</div>
+                        <div class="upcoming-date">Премьера 8 октября 2026</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=Қызыл+раушан+фильм"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ЗАРУБЕЖНЫЕ ФИЛЬМЫ -->
+
+        <div class="upcoming-category">
+            <h3 class="upcoming-category-title">🌎 Зарубежные премьеры</h3>
+
+            <div class="upcoming-grid">
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">СКОРО</span>
+                        <img src="https://www.kino-teatr.ru/movie/poster/205329/286397.jpg"
+                             alt="Диггер">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>Диггер</h3>
+                        <div class="upcoming-meta">Драма · Триллер</div>
+                        <div class="upcoming-date">Премьера 1 октября 2026</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=Диггер+2026+фильм"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">СКОРО</span>
+                        <img src="https://en-images-s.kinorium.com/movie/1080/12375587.jpg?1788069853"
+                             alt="Кит: Во тьме глубин">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>Кит: Во тьме глубин</h3>
+                        <div class="upcoming-meta">Триллер · Драма</div>
+                        <div class="upcoming-date">Премьера 14 октября 2026</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=Кит+Во+тьме+глубин+2026"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upcoming-card">
+                    <div class="upcoming-poster">
+                        <span class="premiere-badge">СКОРО</span>
+                        <img src="https://vkplay.ru/hotbox/content_files/UgcFile/2026/05/05/b58e7c8573294ba5a781c5d80721c169.jpg"
+                             alt="Одиссея">
+                    </div>
+
+                    <div class="upcoming-info">
+                        <h3>Одиссея</h3>
+                        <div class="upcoming-meta">Фантастика · Приключения</div>
+                        <div class="upcoming-date">Скоро в кино</div>
+
+                        <div class="upcoming-buttons">
+                            <a href="booking.html" class="btn">Забронировать</a>
+                            <a href="https://www.youtube.com/results?search_query=Одиссея+2026+фильм"
+                               target="_blank" rel="noopener noreferrer" class="trailer-btn">▶ Трейлер</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- НАША КОМАНДА -->
+
+<section class="section">
+    <div class="container">
+        <h2>Наша команда</h2>
+
+        <div class="team-grid">
+
+            <div class="team-card">
+                <img src="https://i.ytimg.com/vi/_II7tYPk7uE/oardefault.jpg?sqp=-oaymwEkCOADENAFSFqQAgHyq4qpAxMIARUAAAAAJQAAyEI9AICiQ3gB&amp;rs=AOn4CLBlYy3iCxOxgkqs-xNYWRo2xdG0A&amp;usqp=CCk"
+                     alt="Молдир" class="team-photo team-photo-moldir">
+                <h3>Молдир</h3>
+                <p>Администратор</p>
+                <span>Управление сайтом и контроль работы системы.</span>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pinimg.com/474x/a6/f7/af/a6f7af616ebbec8cb4c2bf00b8006250.jpg"
+                     alt="Даниал" class="team-photo">
+                <h3>Даниал</h3>
+                <p>Менеджер</p>
+                <span>Организация работы и управление бронированиями.</span>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pinimg.com/736x/c6/22/c8/c622c8fdd72aaac8cfb46db859056bd4.jpg"
+                     alt="Мария" class="team-photo team-photo-maria">
+                <h3>Мария</h3>
+                <p>Кассир</p>
+                <span>Работа с билетами и оплатой.</span>
+            </div>
+
+            <div class="team-card">
+                <img src="https://i.pinimg.com/originals/89/72/44/89724408a0bf1b4eece2c8d4ada34934.jpg?nii=t"
+                     alt="Мерей" class="team-photo team-photo-merei">
+                <h3>Мерей</h3>
+                <p>Оператор зала</p>
+                <span>Контроль зала и мест посетителей.</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ПОДВАЛ -->
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">CinemaGo</div>
+
+        <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="ratings.html">Рейтинги</a>
+            <a href="soundtracks.html">Саундтреки</a>
+            <a href="booking.html">Бронирование</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="favorites.html">Избранное</a>
+            <a href="account.html">Аккаунт</a>
+        </div>
+    </div>
+
+    <p>© 2026 CinemaGo.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

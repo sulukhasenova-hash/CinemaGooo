@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CinemaGo — Бронирование</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a href="index.html" class="logo">
+            Cinema<span>Go</span>
+        </a>
+
+        <nav>
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="catalog.html">
+                Каталог
+            </a>
+
+            <a href="ratings.html">
+                Рейтинги
+            </a>
+
+            <a href="soundtracks.html">
+                Саундтреки
+            </a>
+
+            <a href="booking.html"
+               class="active">
+                Бронирование
+            </a>
+
+            <a href="reviews.html">
+                Отзывы
+            </a>
+
+            <a href="account.html">
+                Аккаунт
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="page-header">
+
+    <h1>
+        Бронирование билетов
+    </h1>
+
+    <p>
+        Выберите фильм и места в кинозале
+    </p>
+
+</section>
+
+
+<div class="container">
+
+
+    <a href="index.html"
+       class="btn btn-secondary">
+        ← На главную
+    </a>
+
+
+    <br><br>
+
+
+    <div class="booking-box">
+
+
+        <form onsubmit="makeBooking(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    Ваше имя
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Введите имя"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Фильм
+                </label>
+
+                <select id="bookingMovie"
+                        required>
+
+                    <option value="">
+                        Выберите фильм
+                    </option>
+
+                    <option>
+                        Интерстеллар
+                    </option>
+
+                    <option>
+                        Ғашықпын саған
+                    </option>
+
+                    <option>
+                        Рэкетир
+                    </option>
+
+                    <option>
+                        Қазақтың қорқынышты ертегілері
+                    </option>
+
+                    <option>
+                        Дәстүр
+                    </option>
+
+                    <option>
+                        Дәстүр: Теріс бата
+                    </option>
+
+                    <option>
+                        Шайтан
+                    </option>
+
+                    <option>
+                        Дюна
+                    </option>
+
+                    <option>
+                        Оппенгеймер
+                    </option>
+
+                    <option>
+                        Титаник
+                    </option>
+
+                    <option>
+                        Гарри Поттер
+                    </option>
+
+                    <option>
+                        Человек-паук
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Дата
+                </label>
+
+                <input
+                    type="date"
+                    id="bookingDate"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Время
+                </label>
+
+                <select id="bookingTime"
+                        required>
+
+                    <option value="">
+                        Выберите время
+                    </option>
+
+                    <option>
+                        12:00
+                    </option>
+
+                    <option>
+                        14:30
+                    </option>
+
+                    <option>
+                        17:00
+                    </option>
+
+                    <option>
+                        19:30
+                    </option>
+
+                    <option>
+                        22:00
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <h3>
+                Выберите места
+            </h3>
+
+
+            <p id="selectedSeats"
+               class="notice">
+                Места не выбраны
+            </p>
+
+
+            <div class="seats">
+
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A1"
+                        onclick="selectSeat(this)">
+                    A1
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A2"
+                        onclick="selectSeat(this)">
+                    A2
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    A3
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A4"
+                        onclick="selectSeat(this)">
+                    A4
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A5"
+                        onclick="selectSeat(this)">
+                    A5
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    A6
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A7"
+                        onclick="selectSeat(this)">
+                    A7
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="A8"
+                        onclick="selectSeat(this)">
+                    A8
+                </button>
+
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B1"
+                        onclick="selectSeat(this)">
+                    B1
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B2"
+                        onclick="selectSeat(this)">
+                    B2
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B3"
+                        onclick="selectSeat(this)">
+                    B3
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    B4
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B5"
+                        onclick="selectSeat(this)">
+                    B5
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B6"
+                        onclick="selectSeat(this)">
+                    B6
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    B7
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="B8"
+                        onclick="selectSeat(this)">
+                    B8
+                </button>
+
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C1"
+                        onclick="selectSeat(this)">
+                    C1
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    C2
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C3"
+                        onclick="selectSeat(this)">
+                    C3
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C4"
+                        onclick="selectSeat(this)">
+                    C4
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C5"
+                        onclick="selectSeat(this)">
+                    C5
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C6"
+                        onclick="selectSeat(this)">
+                    C6
+                </button>
+
+                <button type="button"
+                        class="seat"
+                        data-seat="C7"
+                        onclick="selectSeat(this)">
+                    C7
+                </button>
+
+                <button type="button"
+                        class="seat occupied">
+                    C8
+                </button>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Способ оплаты
+                </label>
+
+                <select
+                    id="paymentMethod"
+                    onchange="showPaymentInfo()"
+                    required>
+
+                    <option value="">
+                        Выберите способ
+                    </option>
+
+                    <option>
+                        Kaspi
+                    </option>
+
+                    <option>
+                        Банковская карта
+                    </option>
+
+                    <option>
+                        Наличными в кассе
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="kaspiInfo"
+                 class="payment-demo"
+                 style="display:none;">
+
+                <strong>
+                    Kaspi — демонстрационный режим
+                </strong>
+
+                <p>
+                    Для учебного проекта используется
+                    демонстрационная оплата.
+                </p>
+
+                <p>
+                    Реальные платёжные реквизиты
+                    здесь не используются.
+                </p>
+
+            </div>
+
+
+            <br>
+
+
+            <button
+                type="submit"
+                class="btn">
+
+                Забронировать билет
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <div class="footer-content">
+
+        <div class="footer-logo">
+            CinemaGo
+        </div>
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="catalog.html">
+                Каталог
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

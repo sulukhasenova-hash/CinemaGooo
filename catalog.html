@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Каталог — CinemaGo</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- НАВИГАЦИЯ -->
+
+    <header>
+
+        <a href="index.html" class="logo">
+            Cinema<span>Go</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="catalog.html" class="active">Каталог</a>
+            <a href="ratings.html">Рейтинги</a>
+            <a href="soundtracks.html">Саундтреки</a>
+            <a href="booking.html">Бронирование</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="account.html">Аккаунт</a>
+            <a href="favorites.html">Избранное</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ЗАГОЛОВОК -->
+
+    <section class="page-header">
+
+        <h1>Каталог фильмов</h1>
+
+        <p>
+            Выберите фильм, найдите нужный жанр и посмотрите трейлер
+        </p>
+
+    </section>
+
+
+    <!-- КАТАЛОГ -->
+
+    <main class="container">
+
+        <!-- ПОИСК -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="movieSearch"
+                placeholder="Поиск фильма..."
+                oninput="searchMovies()"
+            >
+
+            <button onclick="searchMovies()">
+                Найти
+            </button>
+
+        </div>
+
+
+        <!-- ЖАНРЫ -->
+
+        <div class="genre-buttons">
+
+            <button
+                class="genre-btn active"
+                onclick="filterMovies('all')">
+                Все
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('боевик')">
+                Боевик
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('драма')">
+                Драма
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('ужасы')">
+                Ужасы
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('криминал')">
+                Криминал
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('приключения')">
+                Приключения
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('триллер')">
+                Триллер
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('фантастика')">
+                Фантастика
+            </button>
+
+            <button
+                class="genre-btn"
+                onclick="filterMovies('романтика')">
+                Романтика
+            </button>
+
+        </div>
+
+
+        <!-- ФИЛЬМЫ -->
+
+        <div class="movies-grid">
+
+
+            <!-- 1 -->
+
+            <div class="movie-card" data-genre="фантастика, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+                    alt="Интерстеллар">
+
+                <div class="movie-info">
+
+                    <h3>Интерстеллар</h3>
+
+                    <p>
+                        Команда астронавтов отправляется
+                        через червоточину на поиски нового дома
+                        для человечества.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2014</span>
+                        <span class="rating">★ 8.7</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="movie-card" data-genre="фантастика, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg"
+                    alt="Дюна">
+
+                <div class="movie-info">
+
+                    <h3>Дюна</h3>
+
+                    <p>
+                        Молодой Пол Атрейдес отправляется
+                        на опасную планету Арракис.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2021</span>
+                        <span class="rating">★ 8.0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="movie-card" data-genre="драма, история">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+                    alt="Оппенгеймер">
+
+                <div class="movie-info">
+
+                    <h3>Оппенгеймер</h3>
+
+                    <p>
+                        История учёного, который стал одним
+                        из создателей атомной бомбы.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2023</span>
+                        <span class="rating">★ 8.6</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="movie-card" data-genre="боевик, криминал">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"
+                    alt="Джон Уик">
+
+                <div class="movie-info">
+
+                    <h3>Джон Уик</h3>
+
+                    <p>
+                        Бывший наёмный убийца возвращается
+                        к прошлой жизни ради мести.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2014</span>
+                        <span class="rating">★ 7.4</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="movie-card" data-genre="драма, криминал">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg"
+                    alt="Форрест Гамп">
+
+                <div class="movie-info">
+
+                    <h3>Форрест Гамп</h3>
+
+                    <p>
+                        История необычного человека,
+                        который проходит через важные события жизни.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>1994</span>
+                        <span class="rating">★ 8.8</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 6 -->
+
+            <div class="movie-card" data-genre="романтика, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
+                    alt="Титаник">
+
+                <div class="movie-info">
+
+                    <h3>Титаник</h3>
+
+                    <p>
+                        Любовная история Джека и Розы
+                        на борту знаменитого лайнера.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>1997</span>
+                        <span class="rating">★ 7.9</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 7 -->
+
+            <div class="movie-card" data-genre="ужасы, триллер">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/wR5HZWdpkjw8ByJkQJm6jW8Q9V5.jpg"
+                    alt="Заклятие">
+
+                <div class="movie-info">
+
+                    <h3>Заклятие</h3>
+
+                    <p>
+                        Семья сталкивается с пугающими
+                        сверхъестественными явлениями.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2013</span>
+                        <span class="rating">★ 7.5</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 8 -->
+
+            <div class="movie-card" data-genre="триллер, криминал">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/4GDy0q3j5s0w9n0m1gJ8l7Y6X5F.jpg"
+                    alt="Остров проклятых">
+
+                <div class="movie-info">
+
+                    <h3>Остров проклятых</h3>
+
+                    <p>
+                        Два маршала расследуют исчезновение
+                        пациентки из психиатрической больницы.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2010</span>
+                        <span class="rating">★ 8.2</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 9 -->
+
+            <div class="movie-card" data-genre="приключения, боевик">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/ceG9VzoRAVGwivFU403Wc3AHRys.jpg"
+                    alt="Индиана Джонс">
+
+                <div class="movie-info">
+
+                    <h3>Индиана Джонс</h3>
+
+                    <p>
+                        Археолог отправляется в опасное
+                        приключение в поисках древних артефактов.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>1981</span>
+                        <span class="rating">★ 8.2</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 10 -->
+
+            <div class="movie-card" data-genre="боевик, криминал">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/7RyHsO4yDXtBv1zUU8Q1JmWQ5.jpg"
+                    alt="Мстители">
+
+                <div class="movie-info">
+
+                    <h3>Мстители</h3>
+
+                    <p>
+                        Супергерои объединяются, чтобы
+                        защитить Землю от глобальной угрозы.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2012</span>
+                        <span class="rating">★ 8.0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 11 -->
+
+            <div class="movie-card" data-genre="криминал, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Рэкетир">
+
+                <div class="movie-info">
+
+                    <h3>Рэкетир</h3>
+
+                    <p>
+                        История молодого человека,
+                        оказавшегося в криминальном мире Казахстана.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2007</span>
+                        <span class="rating">★ 8.0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 12 -->
+
+            <div class="movie-card" data-genre="криминал, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Рэкетир 2">
+
+                <div class="movie-info">
+
+                    <h3>Рэкетир 2</h3>
+
+                    <p>
+                        Продолжение истории Саяна,
+                        который пытается начать новую жизнь.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2015</span>
+                        <span class="rating">★ 7.5</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 13 -->
+
+            <div class="movie-card" data-genre="ужасы, триллер">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Дәстүр">
+
+                <div class="movie-info">
+
+                    <h3>Дәстүр</h3>
+
+                    <p>
+                        Казахский фильм ужасов о семье
+                        и страшных традициях прошлого.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2023</span>
+                        <span class="rating">★ 7.4</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 14 -->
+
+            <div class="movie-card" data-genre="ужасы, триллер">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Дәстүр: Теріс бата">
+
+                <div class="movie-info">
+
+                    <h3>Дәстүр: Теріс бата</h3>
+
+                    <p>
+                        Продолжение казахской истории
+                        с мистическими событиями.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2024</span>
+                        <span class="rating">★ 7.2</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 15 -->
+
+            <div class="movie-card" data-genre="ужасы">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Қазақтың қорқынышты ертегілері">
+
+                <div class="movie-info">
+
+                    <h3>Қазақтың қорқынышты ертегілері</h3>
+
+                    <p>
+                        Мрачные истории, основанные
+                        на казахских народных легендах.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2023</span>
+                        <span class="rating">★ 7.0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 16 -->
+
+            <div class="movie-card" data-genre="романтика, драма">
+
+                <button
+                    class="favorite-btn"
+                    onclick="toggleFavorite(this)">
+                    ♡
+                </button>
+
+                <img
+                    class="movie-poster"
+                    src="https://image.tmdb.org/t/p/w500/placeholder.jpg"
+                    alt="Ғашықпын саған">
+
+                <div class="movie-info">
+
+                    <h3>Ғашықпын саған</h3>
+
+                    <p>
+                        Романтическая история о любви,
+                        выборе и отношениях молодых людей.
+                    </p>
+
+                    <div class="movie-meta">
+                        <span>2024</span>
+                        <span class="rating">★ 7.3</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ФУТЕР -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                <div class="footer-logo">
+                    CinemaGo
+                </div>
+
+                <p class="footer-text">
+                    Онлайн-сервис для поиска фильмов,
+                    просмотра рейтингов и бронирования мест в кино.
+                </p>
+            </div>
+
+            <div class="footer-links">
+
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="booking.html">Бронирование</a>
+                <a href="reviews.html">Отзывы</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
